@@ -20,19 +20,19 @@
 	</head>
 	<body>
 	<?php
-	
+	// Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
 			if (isset($_FILES['posterImage']) AND $_FILES['posterImage']['error'] == 0)
 			{
-        
+        		// Testons si le fichier n'est pas trop gros
         		if ($_FILES['posterImage']['size'] <= 10000000)
         		{
-                
+                	// Testons si l'extension est autorisée
                 	$infosfichier = pathinfo($_FILES['posterImage']['name']);
                 	$extension_upload = $infosfichier['extension'];
                 	$extensions_autorisees = array('jpg', 'jpeg', 'gif', 'png');
                		if (in_array($extension_upload, $extensions_autorisees))
             		{
-                       
+                        // On peut valider le fichier et le stocker définitivement
                         move_uploaded_file($_FILES['posterImage']['tmp_name'], 'img/' . basename($_FILES['posterImage']['name']));
 						
 						 
@@ -47,7 +47,7 @@
 			
 		<form method="post" action="index.php" enctype="multipart/form-data">
 		<button class="btn default-primary">Poster</button><br/>
-		<!--<img src="<?php echo 'img/' . basename($_FILES['posterImage']['name']); ?>"/>-->
+		<!--<img src="<?php echo 'img/' . basename($_FILES['posterImage']['name']); ?>" alt="mahmoud" />-->
 		<input type="file"id="inputT" value="image" name="posterImage"></input>
 		</form>
 			<div class="row adapt">
